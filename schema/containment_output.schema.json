@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "explanation": { "type": "string" },
+    "confidence": { "type": "number" },
+    "contain": { "type": "boolean" }
+  },
+  "required": ["confidence", "contain", "explanation"],
+  "additionalProperties": false
+}

